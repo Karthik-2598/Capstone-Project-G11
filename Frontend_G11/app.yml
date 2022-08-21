@@ -1,9 +1,23 @@
+
 runtime: python27
+api_version: 1
+threadsafe: yes
 
 handlers:
-- url: /
-  static_files: Frontend_G11/index.html
-  upload: Frontend_G11/index.html
+  - url: /(.*\.(gif|png|jpg|css|js)(|\.map))$
+    static_files: dist/Frontend_G11/\1
+    upload: dist/Frontend_G11/(.*)(|\.map)
 
-- url: /
-  static_dir: Frontend_G11
+  - url: /(.*)
+    static_files: dist/Frontend_G11/index.html
+    upload: dist/Frontend_G11/index.html
+
+skip_files:
+  - e2e/
+  - node_modules/
+  - src/
+  - ^(.*/)?\..*$
+  - ^(.*/)?.*\.json$
+  - ^(.*/)?.*\.md$
+  - ^(.*/)?.*\.yaml$
+  - ^LICENSE
